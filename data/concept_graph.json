@@ -1,0 +1,790 @@
+[
+  {
+    "name": "Bias-Variance Tradeoff",
+    "summary": "The fundamental tension in machine learning between a model's ability to fit training data (low bias) and its ability to generalize to unseen data (low variance). High-complexity models overfit (low bias, high variance); simple models underfit (high bias, low variance). The optimal model minimizes total error.",
+    "difficulty": 2,
+    "category": "statistical_foundations",
+    "prerequisites": [],
+    "canonical_papers": [],
+    "common_misconceptions": [
+      "More complex models are always better",
+      "Bias and variance can both be minimized simultaneously without tradeoff"
+    ]
+  },
+  {
+    "name": "Maximum Likelihood Estimation",
+    "summary": "A method for estimating the parameters of a statistical model by finding the parameter values that maximize the likelihood of observing the given data. MLE is the foundation for training most ML models — minimizing cross-entropy loss is equivalent to maximum likelihood estimation.",
+    "difficulty": 2,
+    "category": "statistical_foundations",
+    "prerequisites": [],
+    "canonical_papers": [],
+    "common_misconceptions": [
+      "MLE always finds the globally optimal parameters",
+      "MLE and MAP estimation are the same thing"
+    ]
+  },
+  {
+    "name": "Regularization",
+    "summary": "Techniques that constrain model complexity to prevent overfitting. L1 regularization (lasso) adds the sum of absolute weights to the loss, encouraging sparsity. L2 regularization (ridge) adds the sum of squared weights, encouraging small but non-zero weights. Both add a hyperparameter controlling regularization strength.",
+    "difficulty": 2,
+    "category": "statistical_foundations",
+    "prerequisites": [
+      { "name": "Bias-Variance Tradeoff", "strength": "required" },
+      { "name": "Maximum Likelihood Estimation", "strength": "helpful" }
+    ],
+    "canonical_papers": [],
+    "common_misconceptions": [
+      "L1 and L2 regularization have the same effect",
+      "Regularization always hurts training accuracy (it does, but that is the point)"
+    ]
+  },
+  {
+    "name": "Cross-Validation",
+    "summary": "A resampling technique for evaluating model performance by training on subsets of data and testing on held-out folds. K-fold cross-validation splits data into k partitions and trains k models, each using a different fold as the test set. Provides a more reliable estimate of generalization than a single train/test split.",
+    "difficulty": 1,
+    "category": "statistical_foundations",
+    "prerequisites": [
+      { "name": "Bias-Variance Tradeoff", "strength": "required" }
+    ],
+    "canonical_papers": [],
+    "common_misconceptions": [
+      "More folds always give better estimates",
+      "Cross-validation eliminates the need for a final test set"
+    ]
+  },
+  {
+    "name": "Bayesian Inference",
+    "summary": "A framework for updating beliefs about model parameters based on observed data, using Bayes' theorem: posterior is proportional to likelihood times prior. Unlike frequentist approaches, Bayesian methods maintain probability distributions over parameters rather than point estimates, naturally capturing uncertainty.",
+    "difficulty": 3,
+    "category": "statistical_foundations",
+    "prerequisites": [
+      { "name": "Maximum Likelihood Estimation", "strength": "required" }
+    ],
+    "canonical_papers": [],
+    "common_misconceptions": [
+      "Bayesian methods always require choosing a subjective prior",
+      "Bayesian and frequentist methods always give different answers"
+    ]
+  },
+  {
+    "name": "Linear Regression",
+    "summary": "The simplest supervised learning model: predicts a continuous target as a weighted sum of input features plus a bias term. Trained by minimizing mean squared error, which has a closed-form solution (normal equation) or can be solved iteratively with gradient descent. The foundation for understanding more complex models.",
+    "difficulty": 1,
+    "category": "classical_ml",
+    "prerequisites": [
+      { "name": "Maximum Likelihood Estimation", "strength": "helpful" }
+    ],
+    "canonical_papers": [],
+    "common_misconceptions": [
+      "Linear regression requires the data to be linearly distributed",
+      "Outliers do not significantly affect the model"
+    ]
+  },
+  {
+    "name": "Logistic Regression",
+    "summary": "A classification model that applies the sigmoid function to a linear combination of features, outputting a probability between 0 and 1. Trained by minimizing binary cross-entropy loss. Despite its name, it is a classification algorithm, not a regression algorithm. Extends to multi-class via softmax (multinomial logistic regression).",
+    "difficulty": 1,
+    "category": "classical_ml",
+    "prerequisites": [
+      { "name": "Linear Regression", "strength": "required" },
+      { "name": "Maximum Likelihood Estimation", "strength": "helpful" }
+    ],
+    "canonical_papers": [],
+    "common_misconceptions": [
+      "Logistic regression is a type of regression not classification",
+      "The decision boundary must be linear in the original feature space"
+    ]
+  },
+  {
+    "name": "Decision Trees",
+    "summary": "A model that makes predictions by learning a hierarchy of if-then rules that recursively partition the feature space. Each internal node tests a feature, each branch represents an outcome, and each leaf holds a prediction. Interpretable but prone to overfitting. The building block for random forests and gradient boosting.",
+    "difficulty": 1,
+    "category": "classical_ml",
+    "prerequisites": [
+      { "name": "Bias-Variance Tradeoff", "strength": "helpful" }
+    ],
+    "canonical_papers": [],
+    "common_misconceptions": [
+      "Deeper trees are always more accurate",
+      "Decision trees handle all types of relationships well"
+    ]
+  },
+  {
+    "name": "Support Vector Machines",
+    "summary": "A classification model that finds the hyperplane maximizing the margin between classes. Uses the kernel trick to implicitly map data to higher-dimensional spaces, enabling non-linear decision boundaries without explicitly computing the transformation. Effective in high-dimensional spaces and with clear margins of separation.",
+    "difficulty": 3,
+    "category": "classical_ml",
+    "prerequisites": [
+      { "name": "Linear Regression", "strength": "helpful" },
+      { "name": "Regularization", "strength": "helpful" }
+    ],
+    "canonical_papers": [],
+    "common_misconceptions": [
+      "SVMs always outperform simpler methods",
+      "The kernel trick creates new features explicitly"
+    ]
+  },
+  {
+    "name": "Principal Component Analysis",
+    "summary": "An unsupervised dimensionality reduction technique that finds orthogonal directions of maximum variance in the data. Projects data onto the top-k principal components (eigenvectors of the covariance matrix), preserving the most information with fewer dimensions. Used for visualization, noise reduction, and feature extraction.",
+    "difficulty": 2,
+    "category": "classical_ml",
+    "prerequisites": [
+      { "name": "Bias-Variance Tradeoff", "strength": "helpful" }
+    ],
+    "canonical_papers": [],
+    "common_misconceptions": [
+      "PCA always improves model performance",
+      "PCA components are always interpretable features"
+    ]
+  },
+  {
+    "name": "Gradient Descent",
+    "summary": "An iterative optimization algorithm that updates model parameters by moving in the direction of the negative gradient of the loss function. The learning rate controls step size. Variants include stochastic gradient descent (SGD), which uses random subsets of data per step, and mini-batch gradient descent. The core training algorithm for virtually all neural networks.",
+    "difficulty": 2,
+    "category": "classical_ml",
+    "prerequisites": [
+      { "name": "Linear Regression", "strength": "helpful" }
+    ],
+    "canonical_papers": [],
+    "common_misconceptions": [
+      "Gradient descent always finds the global minimum",
+      "A smaller learning rate is always better"
+    ]
+  },
+  {
+    "name": "Ensemble Methods",
+    "summary": "Techniques that combine multiple models to produce better predictions than any individual model. Bagging (e.g., random forests) reduces variance by training models on bootstrap samples and averaging. Boosting (e.g., AdaBoost, XGBoost) reduces bias by training models sequentially, each correcting its predecessor's errors.",
+    "difficulty": 2,
+    "category": "classical_ml",
+    "prerequisites": [
+      { "name": "Decision Trees", "strength": "required" },
+      { "name": "Bias-Variance Tradeoff", "strength": "required" }
+    ],
+    "canonical_papers": [],
+    "common_misconceptions": [
+      "Ensembles always outperform single models",
+      "Bagging and boosting solve the same problem"
+    ]
+  },
+  {
+    "name": "K-Nearest Neighbors",
+    "summary": "A non-parametric algorithm that classifies a data point based on the majority class of its k nearest neighbors in feature space. Requires no training phase — all computation happens at prediction time. Simple and intuitive but computationally expensive for large datasets and sensitive to the choice of distance metric and k.",
+    "difficulty": 1,
+    "category": "classical_ml",
+    "prerequisites": [
+      { "name": "Cross-Validation", "strength": "helpful" }
+    ],
+    "canonical_papers": [],
+    "common_misconceptions": [
+      "KNN works well in high-dimensional spaces without modification",
+      "Larger k always gives better results"
+    ]
+  },
+  {
+    "name": "Neural Network Fundamentals",
+    "summary": "A neural network is a computation graph of layers of interconnected nodes (neurons). Each neuron computes a weighted sum of inputs, adds a bias, and applies a non-linear activation function. Stacking multiple layers creates a deep network capable of learning hierarchical representations. The universal approximation theorem shows that even a single hidden layer can approximate any continuous function given sufficient width.",
+    "difficulty": 2,
+    "category": "deep_learning_fundamentals",
+    "prerequisites": [
+      { "name": "Linear Regression", "strength": "required" },
+      { "name": "Gradient Descent", "strength": "required" }
+    ],
+    "canonical_papers": [],
+    "common_misconceptions": [
+      "Neural networks learn like biological brains",
+      "More layers always means better performance"
+    ]
+  },
+  {
+    "name": "Activation Functions",
+    "summary": "Non-linear functions applied to neuron outputs that enable neural networks to learn non-linear relationships. Sigmoid squashes to (0,1), tanh to (-1,1), ReLU outputs max(0,x). ReLU is the modern default due to computational efficiency and reduced vanishing gradient problems. Variants include Leaky ReLU, ELU, GELU, and Swish.",
+    "difficulty": 1,
+    "category": "deep_learning_fundamentals",
+    "prerequisites": [
+      { "name": "Neural Network Fundamentals", "strength": "required" }
+    ],
+    "canonical_papers": [
+      { "arxiv_id": "1209.5145", "relevance": "canonical", "sections": ["3.1"] }
+    ],
+    "common_misconceptions": [
+      "Sigmoid is still the best activation function",
+      "ReLU neurons that output zero are permanently dead"
+    ]
+  },
+  {
+    "name": "Backpropagation",
+    "summary": "The algorithm for computing gradients of the loss function with respect to every parameter in a neural network, by applying the chain rule of calculus backward through the computation graph. Each layer receives the gradient from the layer above and multiplies it by its own local gradient. This makes gradient descent feasible for deep networks.",
+    "difficulty": 3,
+    "category": "deep_learning_fundamentals",
+    "prerequisites": [
+      { "name": "Neural Network Fundamentals", "strength": "required" },
+      { "name": "Gradient Descent", "strength": "required" },
+      { "name": "Activation Functions", "strength": "helpful" }
+    ],
+    "canonical_papers": [
+      { "arxiv_id": null, "relevance": "canonical", "sections": [] }
+    ],
+    "common_misconceptions": [
+      "Backpropagation is the same as gradient descent (it computes gradients; gradient descent uses them)",
+      "Backpropagation only works for specific architectures"
+    ]
+  },
+  {
+    "name": "Loss Functions",
+    "summary": "Functions that measure the discrepancy between a model's predictions and the true targets. Mean squared error (MSE) for regression, cross-entropy for classification, and many specialized losses (hinge, focal, contrastive). The choice of loss function defines what the model optimizes for and directly affects learning dynamics.",
+    "difficulty": 2,
+    "category": "deep_learning_fundamentals",
+    "prerequisites": [
+      { "name": "Neural Network Fundamentals", "strength": "required" },
+      { "name": "Maximum Likelihood Estimation", "strength": "helpful" }
+    ],
+    "canonical_papers": [],
+    "common_misconceptions": [
+      "Cross-entropy and MSE can be used interchangeably",
+      "Lower training loss always means a better model"
+    ]
+  },
+  {
+    "name": "Batch Normalization",
+    "summary": "A technique that normalizes layer inputs to have zero mean and unit variance within each mini-batch, then applies a learned affine transformation. Reduces internal covariate shift, allows higher learning rates, and acts as a regularizer. Applied between the linear transformation and the activation function in each layer.",
+    "difficulty": 3,
+    "category": "deep_learning_fundamentals",
+    "prerequisites": [
+      { "name": "Neural Network Fundamentals", "strength": "required" },
+      { "name": "Backpropagation", "strength": "required" }
+    ],
+    "canonical_papers": [
+      { "arxiv_id": "1502.03167", "relevance": "canonical", "sections": ["2", "3"] }
+    ],
+    "common_misconceptions": [
+      "Batch normalization eliminates the need for careful initialization",
+      "Batch norm works the same way during training and inference"
+    ]
+  },
+  {
+    "name": "Dropout",
+    "summary": "A regularization technique that randomly sets a fraction of neuron activations to zero during training, forcing the network to learn redundant representations. At test time, all neurons are active but outputs are scaled. Dropout can be interpreted as training an ensemble of subnetworks that share parameters.",
+    "difficulty": 2,
+    "category": "deep_learning_fundamentals",
+    "prerequisites": [
+      { "name": "Neural Network Fundamentals", "strength": "required" },
+      { "name": "Regularization", "strength": "required" }
+    ],
+    "canonical_papers": [],
+    "common_misconceptions": [
+      "Dropout should be used in every layer",
+      "Higher dropout rates always give more regularization benefit"
+    ]
+  },
+  {
+    "name": "Weight Initialization",
+    "summary": "The strategy for setting initial parameter values before training begins. Poor initialization causes vanishing or exploding gradients. Xavier initialization scales weights by 1/sqrt(fan_in) for sigmoid/tanh activations. He initialization scales by sqrt(2/fan_in) for ReLU. Proper initialization is critical for training deep networks.",
+    "difficulty": 2,
+    "category": "deep_learning_fundamentals",
+    "prerequisites": [
+      { "name": "Neural Network Fundamentals", "strength": "required" },
+      { "name": "Backpropagation", "strength": "helpful" }
+    ],
+    "canonical_papers": [],
+    "common_misconceptions": [
+      "Initializing all weights to zero works fine",
+      "Weight initialization doesn't matter with batch normalization"
+    ]
+  },
+  {
+    "name": "Adam Optimizer",
+    "summary": "An adaptive learning rate optimizer that combines momentum (first moment estimate) with RMSProp (second moment estimate). Maintains per-parameter learning rates that adapt based on the history of gradients. Includes bias correction for the moment estimates. The most widely used optimizer in deep learning due to robustness across hyperparameter settings.",
+    "difficulty": 3,
+    "category": "deep_learning_fundamentals",
+    "prerequisites": [
+      { "name": "Gradient Descent", "strength": "required" },
+      { "name": "Backpropagation", "strength": "required" }
+    ],
+    "canonical_papers": [
+      { "arxiv_id": "1412.6980", "relevance": "canonical", "sections": ["2"] }
+    ],
+    "common_misconceptions": [
+      "Adam always converges faster than SGD",
+      "Adam eliminates the need to tune the learning rate"
+    ]
+  },
+  {
+    "name": "Learning Rate Scheduling",
+    "summary": "Techniques for adjusting the learning rate during training. Common strategies include step decay (reduce by factor every N epochs), cosine annealing (smoothly decrease following a cosine curve), warmup (start small and increase), and cyclical learning rates. Proper scheduling often improves final model quality beyond a fixed learning rate.",
+    "difficulty": 2,
+    "category": "deep_learning_fundamentals",
+    "prerequisites": [
+      { "name": "Gradient Descent", "strength": "required" },
+      { "name": "Adam Optimizer", "strength": "helpful" }
+    ],
+    "canonical_papers": [],
+    "common_misconceptions": [
+      "A constant learning rate is always sufficient",
+      "Warmup is only needed for transformer models"
+    ]
+  },
+  {
+    "name": "Overfitting and Underfitting",
+    "summary": "Overfitting occurs when a model memorizes training data noise and fails to generalize; underfitting when it fails to capture the underlying pattern. Diagnosed by comparing training and validation loss: large gap indicates overfitting, both high indicates underfitting. Regularization, early stopping, data augmentation, and architecture changes are the primary remedies.",
+    "difficulty": 1,
+    "category": "deep_learning_fundamentals",
+    "prerequisites": [
+      { "name": "Bias-Variance Tradeoff", "strength": "required" },
+      { "name": "Neural Network Fundamentals", "strength": "required" }
+    ],
+    "canonical_papers": [],
+    "common_misconceptions": [
+      "A model with 100% training accuracy is always good",
+      "Overfitting can only be solved by getting more data"
+    ]
+  },
+  {
+    "name": "Convolutional Neural Networks",
+    "summary": "Networks that use convolutional layers to detect spatial patterns in grid-structured data (images, audio). Each convolutional filter slides across the input, computing dot products to produce feature maps. Pooling layers reduce spatial dimensions. CNNs learn hierarchical features: edges in early layers, textures in middle layers, objects in deep layers.",
+    "difficulty": 3,
+    "category": "architectures",
+    "prerequisites": [
+      { "name": "Neural Network Fundamentals", "strength": "required" },
+      { "name": "Backpropagation", "strength": "required" },
+      { "name": "Activation Functions", "strength": "required" }
+    ],
+    "canonical_papers": [
+      { "arxiv_id": "1209.5145", "relevance": "canonical", "sections": ["2", "3"] }
+    ],
+    "common_misconceptions": [
+      "CNNs only work for images",
+      "Larger kernels always capture more information"
+    ]
+  },
+  {
+    "name": "Recurrent Neural Networks",
+    "summary": "Networks designed for sequential data that maintain a hidden state updated at each time step. The same weights are applied at every step, allowing the network to process sequences of arbitrary length. Vanilla RNNs suffer from vanishing gradients on long sequences, which led to LSTMs and GRUs. Largely superseded by transformers for most sequence tasks.",
+    "difficulty": 3,
+    "category": "architectures",
+    "prerequisites": [
+      { "name": "Neural Network Fundamentals", "strength": "required" },
+      { "name": "Backpropagation", "strength": "required" }
+    ],
+    "canonical_papers": [],
+    "common_misconceptions": [
+      "RNNs can effectively model arbitrarily long dependencies",
+      "RNNs are still the best architecture for sequence modeling"
+    ]
+  },
+  {
+    "name": "Long Short-Term Memory",
+    "summary": "An RNN variant that uses gating mechanisms (input gate, forget gate, output gate) to control information flow through a cell state. The gates learn when to store, retrieve, and erase information, solving the vanishing gradient problem for sequences of moderate length. The dominant sequence model before transformers.",
+    "difficulty": 4,
+    "category": "architectures",
+    "prerequisites": [
+      { "name": "Recurrent Neural Networks", "strength": "required" },
+      { "name": "Backpropagation", "strength": "required" }
+    ],
+    "canonical_papers": [],
+    "common_misconceptions": [
+      "LSTMs completely solve the vanishing gradient problem",
+      "The cell state and hidden state serve the same purpose"
+    ]
+  },
+  {
+    "name": "Attention Mechanism",
+    "summary": "A mechanism that allows neural networks to focus on relevant parts of the input when producing each part of the output. Computed as a weighted sum of value vectors, where weights are derived from the compatibility (dot product) between query and key vectors. Scaled dot-product attention divides by sqrt(d_k) to prevent softmax saturation.",
+    "difficulty": 3,
+    "category": "architectures",
+    "prerequisites": [
+      { "name": "Neural Network Fundamentals", "strength": "required" },
+      { "name": "Recurrent Neural Networks", "strength": "helpful" }
+    ],
+    "canonical_papers": [
+      { "arxiv_id": "1706.03762", "relevance": "canonical", "sections": ["3.2", "3.2.1"] }
+    ],
+    "common_misconceptions": [
+      "Attention replaces recurrence entirely (it replaces sequential processing, not memory)",
+      "All attention heads learn the same thing (they specialize)"
+    ]
+  },
+  {
+    "name": "Transformer Architecture",
+    "summary": "An architecture built entirely on self-attention and feed-forward layers, without recurrence or convolution. Uses multi-head attention to attend to different representation subspaces, positional encodings to inject sequence order, and layer normalization with residual connections. The foundation of BERT, GPT, and virtually all modern LLMs.",
+    "difficulty": 4,
+    "category": "architectures",
+    "prerequisites": [
+      { "name": "Attention Mechanism", "strength": "required" },
+      { "name": "Residual Connections", "strength": "required" },
+      { "name": "Batch Normalization", "strength": "helpful" }
+    ],
+    "canonical_papers": [
+      { "arxiv_id": "1706.03762", "relevance": "canonical", "sections": ["3", "3.1", "3.2", "3.3"] }
+    ],
+    "common_misconceptions": [
+      "Transformers understand language like humans do",
+      "The positional encoding is learned (the original uses fixed sinusoidal)"
+    ]
+  },
+  {
+    "name": "Encoder-Decoder Models",
+    "summary": "An architecture pattern where an encoder compresses input into a representation and a decoder generates output from it. Originally used in sequence-to-sequence models for machine translation. The encoder and decoder can be RNNs, transformers, or other architectures. Attention connects the decoder to encoder outputs, allowing the decoder to focus on relevant input parts.",
+    "difficulty": 3,
+    "category": "architectures",
+    "prerequisites": [
+      { "name": "Recurrent Neural Networks", "strength": "helpful" },
+      { "name": "Attention Mechanism", "strength": "helpful" }
+    ],
+    "canonical_papers": [
+      { "arxiv_id": "1706.03762", "relevance": "canonical", "sections": ["3.1"] }
+    ],
+    "common_misconceptions": [
+      "All encoder-decoder models use attention",
+      "The encoder and decoder must have the same architecture"
+    ]
+  },
+  {
+    "name": "Generative Adversarial Networks",
+    "summary": "A framework where two networks compete: a generator creates synthetic data and a discriminator tries to distinguish real from fake. Training is a minimax game — the generator minimizes and the discriminator maximizes the probability of correct classification. When training succeeds, the generator produces data indistinguishable from real samples.",
+    "difficulty": 4,
+    "category": "architectures",
+    "prerequisites": [
+      { "name": "Neural Network Fundamentals", "strength": "required" },
+      { "name": "Loss Functions", "strength": "required" },
+      { "name": "Backpropagation", "strength": "required" }
+    ],
+    "canonical_papers": [
+      { "arxiv_id": "1406.2661", "relevance": "canonical", "sections": ["1", "3", "4"] }
+    ],
+    "common_misconceptions": [
+      "GANs always produce realistic outputs",
+      "Mode collapse is easily avoided with proper hyperparameter tuning"
+    ]
+  },
+  {
+    "name": "Variational Autoencoders",
+    "summary": "A generative model that learns a probabilistic mapping from data to a continuous latent space and back. The encoder outputs a distribution (mean and variance) over latent codes, a sample is drawn using the reparameterization trick, and the decoder reconstructs the input. Trained by maximizing the evidence lower bound (ELBO) which balances reconstruction quality with latent space regularity.",
+    "difficulty": 4,
+    "category": "architectures",
+    "prerequisites": [
+      { "name": "Neural Network Fundamentals", "strength": "required" },
+      { "name": "Bayesian Inference", "strength": "helpful" },
+      { "name": "Loss Functions", "strength": "required" }
+    ],
+    "canonical_papers": [],
+    "common_misconceptions": [
+      "VAEs and regular autoencoders serve the same purpose",
+      "The latent space is always interpretable"
+    ]
+  },
+  {
+    "name": "Residual Connections",
+    "summary": "Skip connections that add a layer's input directly to its output: y = F(x) + x. This allows gradients to flow directly through the identity shortcut during backpropagation, enabling training of networks with hundreds of layers. The key insight of ResNets is that learning residual functions F(x) = H(x) - x is easier than learning the desired mapping H(x) directly.",
+    "difficulty": 3,
+    "category": "architectures",
+    "prerequisites": [
+      { "name": "Convolutional Neural Networks", "strength": "required" },
+      { "name": "Backpropagation", "strength": "required" }
+    ],
+    "canonical_papers": [
+      { "arxiv_id": "1512.03385", "relevance": "canonical", "sections": ["1", "3"] }
+    ],
+    "common_misconceptions": [
+      "Skip connections bypass learning entirely",
+      "Residual connections only work in CNNs (they are also central to transformers)"
+    ]
+  },
+  {
+    "name": "Diffusion Models",
+    "summary": "Generative models that learn to reverse a gradual noising process. The forward process adds Gaussian noise to data over T steps until it becomes pure noise. The reverse process learns to denoise step by step, generating new samples by starting from random noise. Produce higher-quality samples than GANs in many domains, at the cost of slower sampling.",
+    "difficulty": 4,
+    "category": "architectures",
+    "prerequisites": [
+      { "name": "Neural Network Fundamentals", "strength": "required" },
+      { "name": "Loss Functions", "strength": "required" },
+      { "name": "Bayesian Inference", "strength": "helpful" }
+    ],
+    "canonical_papers": [
+      { "arxiv_id": "2006.11239", "relevance": "canonical", "sections": ["2", "3", "4"] }
+    ],
+    "common_misconceptions": [
+      "Diffusion models are just a type of GAN",
+      "The forward noising process needs to be learned"
+    ]
+  },
+  {
+    "name": "Supervised Learning",
+    "summary": "The paradigm where models learn from labeled input-output pairs. Given training data with known correct answers, the model learns a mapping from inputs to outputs by minimizing prediction error. Includes classification (discrete labels) and regression (continuous values). The most mature and widely deployed ML paradigm.",
+    "difficulty": 1,
+    "category": "training_paradigms",
+    "prerequisites": [
+      { "name": "Loss Functions", "strength": "required" },
+      { "name": "Gradient Descent", "strength": "required" }
+    ],
+    "canonical_papers": [],
+    "common_misconceptions": [
+      "Supervised learning can solve any problem given enough labeled data",
+      "Labels are always correct and unambiguous"
+    ]
+  },
+  {
+    "name": "Unsupervised Learning",
+    "summary": "The paradigm where models learn patterns from unlabeled data without explicit target values. Includes clustering (grouping similar data points), dimensionality reduction (finding compact representations), density estimation, and anomaly detection. Often used for data exploration, feature learning, and as a pretraining step for supervised tasks.",
+    "difficulty": 2,
+    "category": "training_paradigms",
+    "prerequisites": [
+      { "name": "Principal Component Analysis", "strength": "helpful" },
+      { "name": "Neural Network Fundamentals", "strength": "helpful" }
+    ],
+    "canonical_papers": [],
+    "common_misconceptions": [
+      "Unsupervised learning doesn't need any human input",
+      "Clusters found by algorithms always correspond to meaningful groups"
+    ]
+  },
+  {
+    "name": "Self-Supervised Learning and Pre-training",
+    "summary": "A paradigm where the model creates its own supervision signal from unlabeled data. Examples: predicting masked tokens (BERT), predicting next tokens (GPT), predicting image rotations, contrastive learning between augmented views. Pre-training on large unlabeled datasets followed by fine-tuning on smaller labeled datasets is the dominant modern training recipe.",
+    "difficulty": 3,
+    "category": "training_paradigms",
+    "prerequisites": [
+      { "name": "Supervised Learning", "strength": "required" },
+      { "name": "Unsupervised Learning", "strength": "required" },
+      { "name": "Transformer Architecture", "strength": "helpful" }
+    ],
+    "canonical_papers": [
+      { "arxiv_id": "1810.04805", "relevance": "canonical", "sections": ["3"] },
+      { "arxiv_id": "2005.14165", "relevance": "alternative", "sections": ["2"] }
+    ],
+    "common_misconceptions": [
+      "Self-supervised learning is the same as unsupervised learning",
+      "Pre-trained models don't need any task-specific training"
+    ]
+  },
+  {
+    "name": "Transfer Learning and Fine-Tuning",
+    "summary": "Reusing a model trained on one task (typically a large dataset) as the starting point for a different task (typically a smaller dataset). Fine-tuning adjusts some or all pre-trained weights on the new task's data. Transfer learning works because early layers learn general features (edges, syntax) that transfer across tasks, while later layers learn task-specific features.",
+    "difficulty": 2,
+    "category": "training_paradigms",
+    "prerequisites": [
+      { "name": "Self-Supervised Learning and Pre-training", "strength": "required" },
+      { "name": "Supervised Learning", "strength": "required" }
+    ],
+    "canonical_papers": [
+      { "arxiv_id": "1810.04805", "relevance": "canonical", "sections": ["4"] }
+    ],
+    "common_misconceptions": [
+      "All layers should be fine-tuned at the same learning rate",
+      "Transfer learning only works between closely related tasks"
+    ]
+  },
+  {
+    "name": "Few-Shot and In-Context Learning",
+    "summary": "The ability of large language models to perform tasks given only a few examples in the prompt, without any gradient updates. In-context learning provides examples as part of the input text and the model generalizes to new instances. Emergent in large-scale models (GPT-3 and above). Challenges the traditional train/fine-tune paradigm.",
+    "difficulty": 3,
+    "category": "training_paradigms",
+    "prerequisites": [
+      { "name": "Transformer Architecture", "strength": "required" },
+      { "name": "Self-Supervised Learning and Pre-training", "strength": "required" }
+    ],
+    "canonical_papers": [
+      { "arxiv_id": "2005.14165", "relevance": "canonical", "sections": ["1", "2", "3"] }
+    ],
+    "common_misconceptions": [
+      "Few-shot learning means the model was only trained on few examples (it was trained on billions of tokens)",
+      "In-context learning modifies the model's weights"
+    ]
+  },
+  {
+    "name": "Markov Decision Processes",
+    "summary": "The mathematical framework for sequential decision-making under uncertainty. Defined by states, actions, transition probabilities, and rewards. The agent observes a state, takes an action, receives a reward, and transitions to a new state. The goal is to find a policy (mapping from states to actions) that maximizes cumulative discounted reward. Foundation of all reinforcement learning.",
+    "difficulty": 3,
+    "category": "reinforcement_learning",
+    "prerequisites": [
+      { "name": "Bayesian Inference", "strength": "helpful" }
+    ],
+    "canonical_papers": [],
+    "common_misconceptions": [
+      "MDPs require knowing the transition probabilities in advance",
+      "The discount factor is just a mathematical convenience"
+    ]
+  },
+  {
+    "name": "Q-Learning and Deep Q-Networks",
+    "summary": "Q-learning learns an action-value function Q(s,a) that estimates the expected cumulative reward of taking action a in state s. Deep Q-Networks (DQN) use a neural network to approximate Q, enabling RL in high-dimensional state spaces like video games. Key innovations include experience replay (training on random past transitions) and target networks (stabilizing learning).",
+    "difficulty": 4,
+    "category": "reinforcement_learning",
+    "prerequisites": [
+      { "name": "Markov Decision Processes", "strength": "required" },
+      { "name": "Neural Network Fundamentals", "strength": "required" }
+    ],
+    "canonical_papers": [
+      { "arxiv_id": "1312.5602", "relevance": "canonical", "sections": ["1", "3", "4"] }
+    ],
+    "common_misconceptions": [
+      "Q-learning always converges to the optimal policy",
+      "Experience replay is optional for good performance"
+    ]
+  },
+  {
+    "name": "Policy Gradient Methods",
+    "summary": "RL methods that directly optimize the policy (a probability distribution over actions given states) by estimating the gradient of expected reward with respect to policy parameters. The REINFORCE algorithm samples trajectories and uses returns as gradient weights. Policy gradients can handle continuous action spaces and stochastic policies, unlike value-based methods.",
+    "difficulty": 4,
+    "category": "reinforcement_learning",
+    "prerequisites": [
+      { "name": "Markov Decision Processes", "strength": "required" },
+      { "name": "Neural Network Fundamentals", "strength": "required" },
+      { "name": "Backpropagation", "strength": "required" }
+    ],
+    "canonical_papers": [],
+    "common_misconceptions": [
+      "Policy gradients are always more sample-efficient than Q-learning",
+      "High variance in gradient estimates is easily solved"
+    ]
+  },
+  {
+    "name": "Proximal Policy Optimization",
+    "summary": "A policy gradient method that constrains policy updates to prevent destructively large steps. Uses a clipped surrogate objective that limits how much the new policy can deviate from the old one. Achieves comparable or better performance than more complex algorithms (TRPO) while being simpler to implement and tune. The most widely used policy gradient method in practice.",
+    "difficulty": 4,
+    "category": "reinforcement_learning",
+    "prerequisites": [
+      { "name": "Policy Gradient Methods", "strength": "required" }
+    ],
+    "canonical_papers": [
+      { "arxiv_id": "1707.06347", "relevance": "canonical", "sections": ["1", "3"] }
+    ],
+    "common_misconceptions": [
+      "The clipping mechanism makes PPO a conservative algorithm",
+      "PPO completely eliminates the need to tune hyperparameters"
+    ]
+  },
+  {
+    "name": "Reward Modeling and RLHF",
+    "summary": "Reinforcement Learning from Human Feedback trains a reward model on human preference comparisons (which of two outputs is better?), then uses that reward model to fine-tune an LLM via PPO. This aligns the model with human intentions beyond what supervised fine-tuning achieves. The technique behind ChatGPT and other instruction-following models.",
+    "difficulty": 5,
+    "category": "reinforcement_learning",
+    "prerequisites": [
+      { "name": "Proximal Policy Optimization", "strength": "required" },
+      { "name": "Transformer Architecture", "strength": "required" },
+      { "name": "Transfer Learning and Fine-Tuning", "strength": "required" }
+    ],
+    "canonical_papers": [],
+    "common_misconceptions": [
+      "RLHF makes models truthful (it makes them sound helpful, which is different)",
+      "Human preferences are consistent and unambiguous"
+    ]
+  },
+  {
+    "name": "Tokenization and Word Embeddings",
+    "summary": "The process of converting raw text into numerical representations. Tokenization splits text into tokens (words, subwords, or characters). Word embeddings map tokens to dense vectors in a continuous space where semantic relationships are captured geometrically (king - man + woman = queen). Word2Vec learns embeddings by predicting context (skip-gram) or target (CBOW) words. BPE tokenization (used in GPT) learns a subword vocabulary from data.",
+    "difficulty": 2,
+    "category": "llm_specific",
+    "prerequisites": [
+      { "name": "Neural Network Fundamentals", "strength": "required" }
+    ],
+    "canonical_papers": [
+      { "arxiv_id": "1301.3781", "relevance": "canonical", "sections": ["1", "2", "3"] }
+    ],
+    "common_misconceptions": [
+      "Each word always maps to exactly one token",
+      "Word embeddings capture all nuances of meaning"
+    ]
+  },
+  {
+    "name": "Masked Language Modeling",
+    "summary": "A self-supervised pre-training objective where random tokens in the input are replaced with a [MASK] token and the model predicts the original tokens. This forces the model to build bidirectional contextual representations — each token's representation is informed by both left and right context. The pre-training strategy behind BERT and its variants.",
+    "difficulty": 3,
+    "category": "llm_specific",
+    "prerequisites": [
+      { "name": "Transformer Architecture", "strength": "required" },
+      { "name": "Tokenization and Word Embeddings", "strength": "required" },
+      { "name": "Self-Supervised Learning and Pre-training", "strength": "required" }
+    ],
+    "canonical_papers": [
+      { "arxiv_id": "1810.04805", "relevance": "canonical", "sections": ["3.1"] }
+    ],
+    "common_misconceptions": [
+      "BERT predicts all tokens, not just masked ones during training",
+      "Masked language models can generate text autoregressively"
+    ]
+  },
+  {
+    "name": "Autoregressive Language Modeling",
+    "summary": "A pre-training objective where the model predicts the next token given all previous tokens, processing the sequence left-to-right. The model learns the probability distribution P(token_t | token_1, ..., token_{t-1}). This is the foundation of GPT-style models. At generation time, the model samples or selects the next token and feeds it back as input, generating text token by token.",
+    "difficulty": 3,
+    "category": "llm_specific",
+    "prerequisites": [
+      { "name": "Transformer Architecture", "strength": "required" },
+      { "name": "Tokenization and Word Embeddings", "strength": "required" },
+      { "name": "Self-Supervised Learning and Pre-training", "strength": "required" }
+    ],
+    "canonical_papers": [
+      { "arxiv_id": "2005.14165", "relevance": "canonical", "sections": ["2"] }
+    ],
+    "common_misconceptions": [
+      "The model understands meaning rather than predicting statistics",
+      "Larger models always generate more coherent text"
+    ]
+  },
+  {
+    "name": "Scaling Laws",
+    "summary": "Empirical power-law relationships between model performance and three variables: number of parameters, dataset size, and compute budget. Discovered at OpenAI and refined by DeepMind (Chinchilla), these laws predict that performance improves predictably as a function of scale and that there is an optimal ratio between model size and data for a given compute budget.",
+    "difficulty": 3,
+    "category": "llm_specific",
+    "prerequisites": [
+      { "name": "Autoregressive Language Modeling", "strength": "required" },
+      { "name": "Loss Functions", "strength": "helpful" }
+    ],
+    "canonical_papers": [
+      { "arxiv_id": "2005.14165", "relevance": "canonical", "sections": ["1"] }
+    ],
+    "common_misconceptions": [
+      "Scaling laws mean bigger is always better regardless of data",
+      "Scaling laws apply equally to all tasks and domains"
+    ]
+  },
+  {
+    "name": "Prompt Engineering and Chain-of-Thought",
+    "summary": "Techniques for eliciting desired behavior from language models through careful input construction. Prompt engineering crafts instructions, examples, and context to guide model output. Chain-of-thought prompting adds 'let's think step by step' or provides reasoning examples, causing models to generate intermediate reasoning steps before answering, dramatically improving accuracy on complex tasks.",
+    "difficulty": 2,
+    "category": "llm_specific",
+    "prerequisites": [
+      { "name": "Autoregressive Language Modeling", "strength": "required" },
+      { "name": "Few-Shot and In-Context Learning", "strength": "required" }
+    ],
+    "canonical_papers": [
+      { "arxiv_id": "2005.14165", "relevance": "alternative", "sections": ["3"] }
+    ],
+    "common_misconceptions": [
+      "There is one optimal prompt for each task",
+      "Chain-of-thought always improves performance (it mainly helps on multi-step reasoning)"
+    ]
+  },
+  {
+    "name": "AI Alignment",
+    "summary": "The research challenge of ensuring AI systems pursue goals that are aligned with human values and intentions. Includes problems like reward hacking (optimizing a proxy instead of the true objective), goal misgeneralization (learning the wrong goal from training data), and scalable oversight (supervising systems more capable than their overseers). RLHF is a current alignment technique but has known limitations.",
+    "difficulty": 4,
+    "category": "ai_safety",
+    "prerequisites": [
+      { "name": "Reward Modeling and RLHF", "strength": "required" },
+      { "name": "Autoregressive Language Modeling", "strength": "helpful" }
+    ],
+    "canonical_papers": [],
+    "common_misconceptions": [
+      "Alignment is just about preventing the model from saying bad things",
+      "RLHF fully solves alignment"
+    ]
+  },
+  {
+    "name": "Interpretability",
+    "summary": "Methods for understanding what neural networks learn internally and why they make specific predictions. Feature visualization reveals what inputs maximally activate specific neurons. Attention visualization shows which input tokens the model focuses on. Mechanistic interpretability reverse-engineers the computational algorithms learned by individual circuits in the network.",
+    "difficulty": 4,
+    "category": "ai_safety",
+    "prerequisites": [
+      { "name": "Neural Network Fundamentals", "strength": "required" },
+      { "name": "Transformer Architecture", "strength": "helpful" },
+      { "name": "Attention Mechanism", "strength": "helpful" }
+    ],
+    "canonical_papers": [],
+    "common_misconceptions": [
+      "Attention weights tell you what the model is thinking about",
+      "Interpretability and explainability are the same thing"
+    ]
+  }
+]

@@ -1,0 +1,12 @@
+# halpmeAIML Embedding Server Dependencies
+# Install: pip install -r scripts/requirements.txt
+
+sentence-transformers>=3.0.0
+fastapi>=0.115.0
+uvicorn[standard]>=0.34.0
+pydantic>=2.0.0
+
+# torch CPU-only — keeps the install small
+# On Apple Silicon, torch auto-detects MPS; on Linux, this avoids pulling CUDA
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch>=2.2.0

@@ -1,0 +1,41 @@
+{
+  "name": "halpmeaiml",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "migrate": "npx ts-node --compiler-options '{\"module\":\"commonjs\"}' scripts/migrate.ts",
+    "ingest-papers": "npx ts-node --compiler-options '{\"module\":\"commonjs\"}' scripts/ingest-papers.ts",
+    "embed-papers": "npx ts-node --compiler-options '{\"module\":\"commonjs\"}' scripts/embed-papers.ts",
+    "seed-concepts": "npx ts-node --compiler-options '{\"module\":\"commonjs\"}' scripts/seed-concepts.ts",
+    "embedding-server": "bash scripts/start-embedding-server.sh"
+  },
+  "dependencies": {
+    "chromadb": "^1.9.2",
+    "dotenv": "^16.4.7",
+    "fast-xml-parser": "^4.5.1",
+    "googleapis": "^144.0.0",
+    "next": "16.2.3",
+    "pdf-parse": "^1.1.1",
+    "pg": "^8.13.1",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "uuid": "^11.1.0",
+    "zod": "^3.24.2",
+    "zustand": "^5.0.12"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/pg": "^8.11.10",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@types/uuid": "^10",
+    "tailwindcss": "^4",
+    "ts-node": "^10.9.2",
+    "typescript": "^5"
+  }
+}
