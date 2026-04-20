@@ -86,7 +86,7 @@ async function explainConceptWithPrerequisites(
       const raw = await llm.complete({
         systemPrompt:
           `Generate ONE Socratic follow-up question to check the student's understanding of the explanation below.\n\n` +
-          `Explanation:\n${explanation.slice(0, 1000)}\n\n` +
+          `Explanation:\n${explanation}\n\n` +
           `The question must require the student to demonstrate understanding, not just recall. ` +
           `Output only the question itself — no preamble, no label.`,
         userMessage: `Concept: ${conceptName}. Student mastery before this explanation: ${routingContext.mastery_percentage}%.`,
@@ -114,8 +114,8 @@ async function explainConceptWithPrerequisites(
   const citations: Citation[] = tutorContext.raw.paperChunks.map((chunk) => ({
     paper_id: chunk.paper_id,
     paper_title: chunk.paper_title,
-    authors: [],
-    year: 0,
+    authors: chunk.authors,
+    year: chunk.year ?? 0,
     section_number: chunk.section_number,
     section_title: chunk.section_title,
     arxiv_id: chunk.arxiv_id,

@@ -16,6 +16,8 @@ export interface PaperChunkResult {
   chunk_id: string;
   paper_id: string;
   paper_title: string;
+  authors: string[];
+  year: number | null;
   section_id: string;
   section_title: string;
   section_number: string;
@@ -130,6 +132,8 @@ export async function searchPapers(
        c.section_id,
        c.content AS chunk_content,
        p.title AS paper_title,
+       p.authors,
+       p.year,
        p.arxiv_id,
        s.section_title,
        s.section_number,
@@ -150,6 +154,8 @@ export async function searchPapers(
     section_id: string;
     chunk_content: string;
     paper_title: string;
+    authors: string[];
+    year: number | null;
     arxiv_id: string | null;
     section_title: string;
     section_number: string;
@@ -185,6 +191,8 @@ export async function searchPapers(
     chunk_id: c.chunk_id,
     paper_id: c.paper_id,
     paper_title: c.paper_title,
+    authors: c.authors ?? [],
+    year: c.year ?? null,
     section_id: c.section_id,
     section_title: c.section_title,
     section_number: c.section_number,
